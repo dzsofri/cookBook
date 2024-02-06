@@ -1,0 +1,30 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: #88AB8E;
+    padding: 25px 50px;
+}
+
+.navbar{
+    border-radius:  1rem 1rem 0rem 0rem;
+}
+
+.content{
+    background-color: white;
+    min-height: 350px;
+    width: 100%;
+    border-radius: 0rem 0rem 1rem 1rem;
+    box-shadow: rgb(100, 100, 100) 5px 5px 10px;
+}
+
+footer{
+    border-radius:  2rem;
+    background-color: #D9D9D9;
+    text-align: center;
+    padding: 25px;
+    margin: 10px 0px;
+    box-shadow: rgb(100, 100, 100) 5px 5px 10px;
+}
