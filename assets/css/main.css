@@ -10,6 +10,7 @@ body{
 
 .navbar{
     border-radius:  1rem 1rem 0rem 0rem;
+    background-color: #D9D9D9 !important;
     box-shadow: rgb(100, 100, 100) 5px 5px 10px;
     z-index: -1;
 }
@@ -19,11 +20,16 @@ body{
     justify-content: flex-end;
 }
 
+
 .nav-item{
     padding: 2.5px;
     margin: 2.5px;
     border-radius:  10px 10px 10px 10px;
     background-color: #777E78;
+}
+
+a{
+    color: white !important;
 }
 
 .content{
@@ -36,6 +42,7 @@ body{
 
 footer{
     border-radius:  2rem;
+    color: #777E78;
     background-color: #D9D9D9;
     text-align: center;
     padding: 25px;
