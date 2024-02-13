@@ -1,0 +1,12 @@
+.form-container{
+    margin: auto;
+    width: 600px;
+}
+
+.regBtnLine{
+    display: flex;
+}
+
+.regBtnLine label a{
+    color: #88AB8E !important;
+}
