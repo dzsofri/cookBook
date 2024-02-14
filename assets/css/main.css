@@ -56,3 +56,15 @@ footer{
     height: 50px;
     background-color: #777E78;
 }
+
+/*Mobilos nézet*/
+/*
+@media only screen and (max-width: 600px) {
+
+    .nav-item 
+    {
+        display: none;
+    }
+
+  }
+*/
