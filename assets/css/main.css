@@ -11,15 +11,16 @@ body{
 .navbar{
     border-radius:  1rem 1rem 0rem 0rem;
     background-color: #D9D9D9 !important;
-    box-shadow: rgb(100, 100, 100) 5px 5px 10px;
-    z-index: -1;
+    box-shadow: rgb(100, 100, 100) 5px 0px 10px;
 }
 
-#navbarNav{
-    display: flex;
-    justify-content: flex-end;
+#krumpli{
+    width: 100%;
 }
 
+.navbar-nav{
+    margin-left: auto;
+}
 
 .nav-item{
     padding: 2.5px;
@@ -28,9 +29,39 @@ body{
     background-color: #777E78;
 }
 
+@media only screen and (max-width: 991px) {
+    a{
+        margin-right: 2%;
+    }
+    .nav-item{
+        max-width: 100%;
+        min-width: 100%;
+        text-align: center;
+        margin-left: auto;
+    }
+
+    .dropdown-menu{
+        text-align: center;
+        background-color: rgba(119, 126, 120, 0.5);
+    }
+  }
+
 a{
     color: white !important;
 }
+
+
+
+.dropdown-menu{
+    background-color: rgba(119, 126, 120, 0.5);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.dropdown-item:hover{
+    color: black !important;
+}
+
+
 
 .content{
     background-color: white;
@@ -56,15 +87,3 @@ footer{
     height: 50px;
     background-color: #777E78;
 }
-
-/*Mobilos nézet*/
-/*
-@media only screen and (max-width: 600px) {
-
-    .nav-item 
-    {
-        display: none;
-    }
-
-  }
-*/
