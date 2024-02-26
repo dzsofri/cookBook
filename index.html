@@ -59,14 +59,20 @@
           </div>
         </div>
       </nav>
-      <main class="content">
+      <main class="content" ng-view>
 
       </main>
-      <footer>
-        CookBook 2024
-    </footer>
+      <footer>{{company}} - @{{year}}.</footer>
     </div>
 
     </div>
+    <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/axios.min.js"></script>
+        <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/angular-route.min.js"></script>
+        <script src="assets/js/ng-notify.min.js"></script>
+        <script src="assets/js/angular-uuid.js"></script>
+        <script src="assets/js/app.js"></script>
+        
 </body>
 </html>
