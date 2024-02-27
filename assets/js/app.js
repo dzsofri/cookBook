@@ -26,6 +26,7 @@ app.config(function($routeProvider){
     })
     .when('/register', {
         templateUrl: '/views/register.html',
+        controller: 'userCtrl'
     })
     .when('/mainPage', {
         templateUrl: '/views/fooldal.html',
