@@ -23,7 +23,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             
-            <ul class="navbar-nav" id="loggedOutMenu" ng-show="!isLoggedIn">
+            <ul class="navbar-nav" id="loggedOutMenu">
               <li class="nav-item">
                   <a class="nav-link" href="#!/login">Belépés</a>
               </li>
@@ -33,7 +33,7 @@
           </ul>
 
           
-            <ul class="navbar-nav" id="loggedInMenu" ng-show="isLoggedIn">
+            <ul class="navbar-nav" id="loggedInMenu">
               <li class="nav-item">
                 <a class="nav-link" href="#!/mainPage">Főoldal</a>
               </li>
@@ -62,12 +62,23 @@
           </div>
         </div>
       </nav>
-      <main class="content" ng-view>
+      <main class="content">
         <div class="receptKep">
-
+          <img src="../assets/img/foetel.jpg" alt="" srcset="">
         </div>
         <div class="cards">
-            <div class="card1"></div>
+            <div class="card1">
+              <div class="card-image"></div>
+              <div class="card-text"></div>
+            </div>
+            <div class="card2">
+              <div class="card-image"></div>
+              <div class="card-text"></div>
+            </div>
+            <div class="card3">
+              <div class="card-image"></div>
+              <div class="card-text"></div>
+            </div>
         </div>
       </main>
       <footer>{{company}} - @{{year}}.</footer>
