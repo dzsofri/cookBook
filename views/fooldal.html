@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="cookBook">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/ng-notify.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>CookBook</title>
+</head>
+<body>
+  <div class="container">  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <img src="../assets/img/logo.png" alt="Logo" id="logo">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            
+            <ul class="navbar-nav" id="loggedOutMenu" ng-show="!isLoggedIn">
+              <li class="nav-item">
+                  <a class="nav-link" href="#!/login">Belépés</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#!/register">Regisztráció</a>
+              </li>
+          </ul>
+
+          
+            <ul class="navbar-nav" id="loggedInMenu" ng-show="isLoggedIn">
+              <li class="nav-item">
+                <a class="nav-link" href="">Reggeli</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ebéd</a>
+                <div class="dropdown-menu">      
+                  <a class="dropdown-item" href="#">Előétel</a>      
+                  <a class="dropdown-item" href="#">Főétel</a>      
+                  <a class="dropdown-item" href="#">Köret</a>
+                  <a class="dropdown-item" href="#">Desszert</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Vacsora</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Saját receptek</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Rólunk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main class="content">
+        <br>
+        <br>
+
+        <div class="heroImg mb-3">heroImg</div>
+
+        <a href="#">
+            <div class="mainCard mb-3">
+                <img class="cardImg" src="" alt="">
+                <div class="cardContent">Kattints ide, hogy többet megtudj róluk!</div>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="mainCard mb-3">
+                <img class="cardImg" src="" alt="">
+                <div class="cardContent">Kattints ide, hogy többet megtudj róluk!</div>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="mainCard mb-3">
+                <img class="cardImg" src="" alt="">
+                <div class="cardContent">Kattints ide, hogy többet megtudj róluk!</div>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="mainCard mb-3">
+                <img class="cardImg" src="" alt="">
+                <div class="cardContent">Kattints ide, hogy többet megtudj róluk!</div>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="mainCard mb-3">
+                <img class="cardImg" src="" alt="">
+                <div class="cardContent">Kattints ide, hogy többet megtudj rólunk!</div>
+            </div>
+        </a>
+
+      <footer>
+        CookBook 2024
+    </footer>
+    </div>
+
+    </div>
+</body>
+</html>
