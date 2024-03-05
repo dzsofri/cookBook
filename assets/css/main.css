@@ -145,7 +145,7 @@ footer{
 .receptKep img{
     object-fit: cover;
     width: 95%;
-    height: 200px;
+    height: 300px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -158,7 +158,7 @@ footer{
     flex-direction: column;
     justify-content: center;
     margin: auto;
-    width: 50%;
+    width: 95%;
 }
 
 .cards img{
@@ -197,11 +197,36 @@ footer{
     margin-bottom: 10px;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    margin-bottom: 40px;
 }
 
-.card1 span{
-    
+.cards span{
+    margin-top: 11px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.cards > * > .card-text {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-text button{
+    margin-top: 5px;
+    background-color: #88AB8E;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
 }
 
 
-/* --- Főétel css --- */
+/* --- Főétel css end --- */
