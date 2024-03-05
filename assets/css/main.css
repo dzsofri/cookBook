@@ -138,3 +138,48 @@ footer{
         margin-top: 10px;
     }
 }
+
+/* FŐOLDAL CSS*/
+
+.heroImg{
+    border: 1px solid black;
+    width: 90%;
+    height: 250px;
+    margin: auto;
+}
+
+.mainCard{
+    width: 90%;
+    height: 250px;
+    border: 1px solid black;
+    margin: auto;
+    display: flex;
+}
+
+.cardImg{
+    min-width: 250px;
+    height: 100%;
+    background-color: grey;
+}
+
+.cardContent{
+    width: fit-content;
+    color: black;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .heroImg{
+        width: 90%;
+        height: 200px;
+    }
+    
+    .mainCard{
+        width: 90%;
+        height: 200px;
+    }
+    
+    .cardImg{
+        min-width: 200px;
+    }
+}
