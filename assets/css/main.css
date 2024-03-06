@@ -163,6 +163,8 @@ footer{
 
 .cards img{
     object-fit: cover;
+    min-width: 190px;
+    max-height: 173px;
     width: 100%;
     height: 100%;
     margin: auto;
