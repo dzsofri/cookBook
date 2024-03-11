@@ -144,6 +144,7 @@ footer{
 .heroImg{
     border: 1px solid black;
     width: 90%;
+    min-width: 215px;
     height: 250px;
     margin: auto;
     box-shadow: rgb(100, 100, 100) 5px 5px 10px;
@@ -198,4 +199,25 @@ footer{
 .mainCard .cardContent{
     color: black;
     margin: auto;
+}
+
+@media screen and (max-width: 469px) {
+    .mainCard .cardContent{
+        display: none;
+    }
+
+    .mainCard .cardImg img{
+        width: 100%;
+    }
+
+    .mainCard .cardImg{
+        margin-right: 0;
+        border-radius: .4rem;
+        width: 100%;
+    }
+
+    .mainCard{
+        min-width: 215px;
+        border-radius: .4rem;
+    }
 }
