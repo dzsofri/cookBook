@@ -167,7 +167,7 @@ footer{
     max-height: 173px;
     width: 100%;
     height: 100%;
-    margin: auto;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     justify-content: left !important;    
@@ -206,7 +206,7 @@ footer{
     margin-top: 11px;
     margin-right: 15px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: justify;
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
@@ -218,6 +218,7 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: 150px;
 }
 
 .card-text button{
@@ -229,6 +230,26 @@ footer{
     color: white;
     font-weight: 500;
 }
+
+@media only screen and (max-width: 480px) {
+    .card1{
+        display: flex;
+        flex-direction: column;
+    }
+    .card2{
+        display: flex;
+        flex-direction: column;
+    }
+    .card3{
+        display: flex;
+        flex-direction: column;
+    }
+    .cards img{
+        max-width: 338px;
+        max-height: 200px;
+        padding: 10px;
+    }
+  }
 
 
 /* --- Főétel css end --- */
