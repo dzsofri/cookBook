@@ -1,6 +1,11 @@
 <div class="form-container">
     <h1>Bejelentkezés</h1>
 
+    <div class="alert alert-danger d-none" role="alert" id="alertBox">
+        <!-- alertmessages shows here -->
+    </div>
+    
+
     <div class="mb-3">
         <input type="text" class="form-control" id="name" placeholder="Felhasználónév">
     </div>
@@ -11,6 +16,6 @@
 
     <div class="mb-3 regBtnLine">
         <label>Még nincs fiókod? <a href="#!/login">Regisztráció</a></label>
-        <button class="btn btn-primary mb-3" ng-click="login()">Bejelentkezés</button>
+        <button class="btn btn-primary mb-3" onclick="login()">Bejelentkezés</button>
     </div>
 </div>
