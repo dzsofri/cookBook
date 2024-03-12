@@ -159,6 +159,7 @@ footer{
     justify-content: center;
     margin: auto;
     width: 95%;
+
 }
 
 .cards img{
@@ -167,7 +168,7 @@ footer{
     max-height: 173px;
     width: 100%;
     height: 100%;
-    margin-top: 4px;
+    margin: auto;
     display: flex;
     flex-direction: row;
     justify-content: left !important;    
@@ -206,9 +207,12 @@ footer{
     margin-top: 11px;
     margin-right: 15px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     text-align: justify;
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 150px;
 }
 
 .cards > * > .card-text {
@@ -218,7 +222,7 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 150px;
+    padding: 10px;
 }
 
 .card-text button{
@@ -230,6 +234,7 @@ footer{
     color: white;
     font-weight: 500;
 }
+
 
 @media only screen and (max-width: 480px) {
     .card1{
@@ -251,5 +256,23 @@ footer{
     }
   }
 
+
+  @media (max-width: 768px) {
+    .card-text span {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .card-text span {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .card-text span {
+      font-size: 1.5rem;
+    }
+  }
 
 /* --- Főétel css end --- */
