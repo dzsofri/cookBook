@@ -1,12 +1,18 @@
 var app = angular.module('cookBook', ['ngRoute', 'ngNotify', 'angular-uuid']);
 
+function showMessage(msg){
+    let alertBox = document.querySelector('#alertBox');
+    alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
+    alertBox.classList.remove('d-none');
+}
+let loggedUser = JSON.parse(sessionStorage.getItem('cookBook'));
+
 app.run(function($rootScope, $location){
     $rootScope.serverUrl = 'http://localhost:5000';
     $rootScope.company = 'cookBook';
     $rootScope.year = new Date().getFullYear();
 
-
-
+    
     if (sessionStorage.getItem('CookBook')){
         $rootScope.isLoggedIn = true;
         token = JSON.parse(sessionStorage.getItem('CookBook')).token;
@@ -21,8 +27,8 @@ app.config(function($routeProvider){
 
     $routeProvider
     .when('/login', {
-        templateUrl: '/views/login.html'
-        //controller: ''
+        templateUrl: '/views/login.html',
+        controller: 'userCtrl'
     })
     .when('/register', {
         templateUrl: '/views/register.html',
