@@ -8,15 +8,15 @@ function showMessage(msg){
 let loggedUser = JSON.parse(sessionStorage.getItem('cookBook'));
 
 app.run(function($rootScope, $location){
-    $rootScope.serverUrl = 'http://localhost:5000';
+    $rootScope.serverUrl = 'http://localhost:3000';
     $rootScope.company = 'cookBook';
     $rootScope.year = new Date().getFullYear();
 
     
     if (sessionStorage.getItem('CookBook')){
         $rootScope.isLoggedIn = true;
-        token = JSON.parse(sessionStorage.getItem('CookBook')).token;
-        $rootScope.loggedUser = $rootScope.getLoggedUser(token);
+      sessionStorage.getItem('CookBook')
+        $rootScope.loggedUser = $rootScope.getLoggedUser();
     }else{
         $rootScope.isLoggedIn = false;
         $rootScope.loggedUser = null;

@@ -21,7 +21,7 @@
                         email: email.value,
                         passwd: passwd.value
                     } 
-                    axios.post(`http://localhost:5000/users`, newUser).then(res =>{
+                    axios.post('http://localhost:3000/users', newUser).then(res =>{
                          alert('Sikeres regisztráció! Most már beléphetsz!');
                          document.location.href = 'index.html';
                     });
@@ -44,12 +44,12 @@
                 name: name.value,
                 passwd: passwd.value
             }
-            axios.post(`http://localhost:5000/users`, data).then(res => {
+            axios.post(`http://localhost:3000/users`, data).then(res => {
                 if(res.data.length == 0){
                     showMessage("Hibás belépési adatok!");
                 }else
                 {
-                    sessionStorage.setItem('cookBook', JSON.stringify(res.data[0]));
+                    sessionStorage.setItem('CookBook', JSON.stringify(res.data[0]));
                     document.location.href='index.html';
                 }
             })
@@ -58,7 +58,7 @@
     
     
     function logout(){
-        sessionStorage.removeItem('stepCounterAppUser');
+        sessionStorage.removeItem('CookBook');
         document.location.href='index.html';
     }
 
