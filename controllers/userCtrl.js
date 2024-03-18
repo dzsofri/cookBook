@@ -1,65 +1,68 @@
+app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
+    $scope.user = {};
 
-
-    function register(){
-        let name = document.querySelector('#name');
-        let email = document.querySelector('#email');
-        let passwd = document.querySelector('#passwd');
-        let confirm = document.querySelector('#confirm');
-    
-        if (name.value == "" || email.value == "" || passwd.value == "" || confirm.value == ""){
-            showMessage("Nem adtál meg minden adatot!");
-        }
-        else{
-            if (passwd.value != confirm.value){
-                showMessage("A megadott jelszavak nem egyeznek!");
-            }
-            else
-            {
-                
-                    let newUser = {
-                        name: name.value,
-                        email: email.value,
-                        passwd: passwd.value
-                    } 
-                    axios.post(`http://localhost:5000/users`, newUser).then(res =>{
-                         alert('Sikeres regisztráció! Most már beléphetsz!');
-                         document.location.href = 'index.html';
+    $scope.register = function(){
+        if ($scope.user.name == null || $scope.user.email == null || $scope.user.passwd == null || $scope.user.confirm == null){
+            ngNotify.set('Nem adtál meg minden adatot!!', 'error');
+           
+        }else{
+            if ($scope.user.passwd != $scope.user.confirm){
+                ngNotify.set('A megadott jelszavak nem egyeznek!', 'error');
+              
+            }else{
+                if (!$scope.user.passwd.match($rootScope.passwdRegExp)){
+                 
+                 ngNotify.set('A megadott jelszó nem megfelelő erősségű!', 'error');
+                }else{
+                    let data = {
+                        email: $scope.user.email
+                    }
+                    axios.post($rootScope.serverUrl + '/db/emailcheck', data).then(res =>{
+                        if (res.data.length > 0){
+                            ngNotify.set('Ez az e-mail cím már regisztrálva van!', 'error');
+                           
+                        }else{
+                            data = {
+                                name: $scope.user.name,
+                                email: $scope.user.email,
+                                passwd: CryptoJS.SHA1($scope.user.passwd).toString()
+                            }
+                            axios.post($rootScope.serverUrl + '/db/registration', data).then(res=>{
+                                if(res.data.affectedRows == 1){
+                                    
+                                    ngNotify.set('Sikeres regisztráció!', 'success');
+                                    $location.path('/login');
+                                    //TODO: valamiért nem irányít át
+                                }else{
+                                    ngNotify.set('Hiba történt a regisztráció során!', 'error');
+                                    
+                                }
+                            });
+                        }
                     });
                 }
-                
-               
             }
         }
-    
+    }
 
-    function login(){
-        let name = document.querySelector('#name');
-        let passwd = document.querySelector('#passwd');
-    
-        if (name.value == "" || passwd.value == "" ){
-            showMessage("Nem adtál meg minden adatot!");
-        }
-        else{
-            let data = {
-                name: name.value,
-                passwd: passwd.value
+    $scope.login = function(){
+        if ($scope.user.email == null || $scope.user.passwd == null){
+            ngNotify.set('Nem adtál meg minden adatot!!', 'error');
+        }else{
+            data = {
+                email: $scope.user.email,
+                passwd: CryptoJS.SHA1($scope.user.passwd).toString()
             }
-            axios.post(`http://localhost:5000/users`, data).then(res => {
-                if(res.data.length == 0){
-                    showMessage("Hibás belépési adatok!");
-                }else
-                {
-                    sessionStorage.setItem('cookBook', JSON.stringify(res.data[0]));
-                    document.location.href='index.html';
+            axios.post($rootScope.serverUrl + '/db/logincheck', data).then(res=>{
+                if(res.data.token == ""){
+                    ngNotify.set('Hibás belépési adatok!', 'error');
+                }else{
+                    sessionStorage.setItem('weatherApp', JSON.stringify(res.data.token));
+                    ngNotify.set('Sikeres belépés', 'succes');
+                    $rootScope.isLoggedIn = true;
+                    $location.path('/newdata');
                 }
-            })
+            });
         }
     }
-    
-    
-    function logout(){
-        sessionStorage.removeItem('stepCounterAppUser');
-        document.location.href='index.html';
-    }
-
-    //hjiserhioasepo9
+});
