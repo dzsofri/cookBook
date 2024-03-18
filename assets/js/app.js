@@ -5,7 +5,7 @@ function showMessage(msg){
     alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
     alertBox.classList.remove('d-none');
 }
-let loggedUser = JSON.parse(sessionStorage.getItem('cookBook'));
+let loggedUser = JSON.parse(sessionStorage.getItem('CookBook'));
 
 app.run(function($rootScope, $location){
     $rootScope.serverUrl = 'http://localhost:3000';
@@ -15,7 +15,7 @@ app.run(function($rootScope, $location){
     
     if (sessionStorage.getItem('CookBook')){
         $rootScope.isLoggedIn = true;
-      sessionStorage.getItem('CookBook')
+        token = JSON.parse(sessionStorage.getItem('CookBook')).token;
         $rootScope.loggedUser = $rootScope.getLoggedUser();
     }else{
         $rootScope.isLoggedIn = false;
