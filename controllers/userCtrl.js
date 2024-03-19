@@ -44,7 +44,7 @@
                 name: name.value,
                 passwd: passwd.value
             }
-            axios.get(`http://localhost:3000/users`, data).then(res => {
+            axios.post(`http://localhost:3000/logincheck`, data).then(res => {
                 if(res.data.length == 0){
                     showMessage("Hibás belépési adatok!");
                 }else
@@ -62,4 +62,3 @@
         document.location.href='index.html';
     }
 
-    //hjiserhioasepo9
