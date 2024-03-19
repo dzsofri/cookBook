@@ -6,7 +6,7 @@ function showMessage(msg){
     alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
     alertBox.classList.remove('d-none');
 }
-let loggedUser = JSON.parse(sessionStorage.getItem('CookBook'));
+let loggedUser = sessionStorage.getItem('CookBook');
 
 app.run(function($rootScope, $location){
     $rootScope.serverUrl = 'http://localhost:3000';
@@ -29,8 +29,8 @@ app.config(function($routeProvider){
 
     $routeProvider
     .when('/login', {
-        templateUrl: '/views/login.html'
-        //controller: ''
+        templateUrl: '/views/login.html',
+        controller: 'userCtrl'
     })
     .when('/register', {
         templateUrl: '/views/register.html',

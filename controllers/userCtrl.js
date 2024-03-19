@@ -1,7 +1,7 @@
-app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
-    $scope.user = {};
 
-8
+  ;
+
+
 
     function register(){
         let name = document.querySelector('#name');
@@ -33,15 +33,17 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                 }
             }
         }
-    }
+    
 
-    $scope.login = function(){
-        if ($scope.user.email == null || $scope.user.passwd == null){
-            ngNotify.set('Nem adtál meg minden adatot!!', 'error');
+   function login(){
+    let name = document.querySelector('#name');
+    let passwd = document.querySelector('#passwd');
+        if (name.value == "" || passwd.value == ""){
+            nhowMessage("Nem adtál meg minden adatot!");
         }else{
             data = {
-                email: $scope.user.email,
-                passwd: CryptoJS.SHA1($scope.user.passwd).toString()
+                name:name.value,
+                passwd: passwd.value
             }
 
             axios.post(`http://localhost:3000/users`, data).then(res => {
@@ -65,5 +67,5 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
     }
 
 
-});
+
 
