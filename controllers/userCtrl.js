@@ -1,4 +1,7 @@
+app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
+    $scope.user = {};
 
+8
 
     function register(){
         let name = document.querySelector('#name');
@@ -24,26 +27,23 @@
                     axios.post('http://localhost:3000/users', newUser).then(res =>{
                          alert('Sikeres regisztráció! Most már beléphetsz!');
                          document.location.href = 'index.html';
+
+    
                     });
                 }
-                
-               
             }
         }
-    
+    }
 
-    function login(){
-        let name = document.querySelector('#name');
-        let passwd = document.querySelector('#passwd');
-    
-        if (name.value == "" || passwd.value == "" ){
-            showMessage("Nem adtál meg minden adatot!");
-        }
-        else{
-            let data = {
-                name: name.value,
-                passwd: passwd.value
+    $scope.login = function(){
+        if ($scope.user.email == null || $scope.user.passwd == null){
+            ngNotify.set('Nem adtál meg minden adatot!!', 'error');
+        }else{
+            data = {
+                email: $scope.user.email,
+                passwd: CryptoJS.SHA1($scope.user.passwd).toString()
             }
+
             axios.post(`http://localhost:3000/users`, data).then(res => {
                 if(res.data.length == 0){
                     showMessage("Hibás belépési adatok!");
@@ -51,14 +51,19 @@
                 {
                     sessionStorage.setItem('CookBook', JSON.stringify(res.data[0]));
                     document.location.href='index.html';
+
                 }
-            })
+            });
         }
     }
+
     
     
     function logout(){
         sessionStorage.removeItem('CookBook');
         document.location.href='index.html';
     }
+
+
+});
 
