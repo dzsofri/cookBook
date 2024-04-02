@@ -15,6 +15,10 @@ function showMessage(msg){
 }
 
 
+
+let loggedUser = sessionStorage.getItem('CookBook');
+
+
 app.run(function($rootScope, $location){
     $rootScope.serverUrl = 'http://localhost:3000';
     $rootScope.company = 'cookBook';

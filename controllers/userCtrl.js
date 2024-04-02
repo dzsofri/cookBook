@@ -1,6 +1,9 @@
+
 app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
 
-    $scope.register = function(){
+
+    function register(){
+
         let name = document.querySelector('#name');
         let email = document.querySelector('#email');
         let passwd = document.querySelector('#passwd');
@@ -29,6 +32,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                 });
             }
         }
+
     };
 
     $scope.login = function(){
@@ -42,7 +46,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
             let data = {
                 name: name.value,
                 passwd: passwd.value
-            };
+
             axios.post(`http://localhost:3000/users`, data).then(res => {
                 if(res.data.length == 0){
                     $scope.showMessage("Hibás belépési adatok!");
@@ -72,3 +76,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
     };
 
 });
+
+
+
+
