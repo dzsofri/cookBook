@@ -4,7 +4,7 @@ var app = angular.module('cookBook', ['ngRoute', 'ngNotify', 'angular-uuid']);
 let loggedInMenu = document.querySelector('#loggedInMenu');
 let loggedOutMenu = document.querySelector('#loggedOutMenu');
 
-let loggedUser = sessionStorage.getItem('CookBook');
+;
 
 
 

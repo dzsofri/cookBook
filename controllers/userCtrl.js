@@ -46,7 +46,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
             let data = {
                 name: name.value,
                 passwd: passwd.value
-
+            }
             axios.post(`http://localhost:3000/users`, data).then(res => {
                 if(res.data.length == 0){
                     $scope.showMessage("Hibás belépési adatok!");
