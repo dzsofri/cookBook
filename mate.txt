@@ -1,0 +1,7 @@
+Szeretünk főzni, és szeretjük megosztani a receptjeinket másokkal is. Ezért hoztuk létre ezt a weboldalt, ahol bárki feltöltheti a saját receptjeit, és böngészhet a fejlesztők által feltöltött receptek között.
+
+A weboldal fejlesztésében elsősorban a HTML és CSS kódért voltam felelős. Célom, hogy a weboldal könnyen használható és átlátható legyen, és hogy a receptek ízlésesen, a figma tervhez hűen legyenek megjelenítve.
+
+Számos receptet én gyűjtöttem és illesztettem be az adatbázisba.
+
+Remélem, hogy tetszeni fog a weboldal, és sok finom receptet találtok majd itt!
