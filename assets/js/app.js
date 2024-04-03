@@ -1,32 +1,46 @@
 var app = angular.module('cookBook', ['ngRoute', 'ngNotify', 'angular-uuid']);
 
 
+let loggedInMenu = document.querySelector('#loggedInMenu');
+let loggedOutMenu = document.querySelector('#loggedOutMenu');
+
+;
+
+
+
 function showMessage(msg){
     let alertBox = document.querySelector('#alertBox');
     alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
     alertBox.classList.remove('d-none');
 }
+
+
+
 let loggedUser = sessionStorage.getItem('CookBook');
+
 
 app.run(function($rootScope, $location){
     $rootScope.serverUrl = 'http://localhost:3000';
     $rootScope.company = 'cookBook';
     $rootScope.year = new Date().getFullYear();
-
-
-
-    if (sessionStorage.getItem('CookBook')){
-        $rootScope.isLoggedIn = true;
-        token = JSON.parse(sessionStorage.getItem('CookBook')).token;
-        $rootScope.loggedUser = $rootScope.getLoggedUser();
-    }else{
-        $rootScope.isLoggedIn = false;
-        $rootScope.loggedUser = null;
+   
+    if (loggedUser != null){
+        loggedOutMenu.classList.add('d-none');
+        loggedInMenu.classList.remove('d-none');
+        $location.path('/mainPage');
+    } else {
+        loggedInMenu.classList.add('d-none');
+        loggedOutMenu.classList.remove('d-none');
+        $location.path('/login');
     }
+   
+   
 });
+
 
 app.config(function($routeProvider){
 
+   
     $routeProvider
     .when('/login', {
         templateUrl: '/views/login.html',
