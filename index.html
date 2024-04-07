@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu" ng-app="cookBook">
+<html lang="hu" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
   <div class="container">  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" >
         <div class="container-fluid">
           <img src="./assets/img/logo.png" alt="Logo" id="logo">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             
-            <ul class="navbar-nav" id="loggedOutMenu" ng-show="!isLoggedIn">
+            <ul class="navbar-nav" id="loggedOutMenu" ng-hide="isLoggedIn">
               <li class="nav-item">
                   <a class="nav-link" href="#!/login">Belépés</a>
               </li>
@@ -32,7 +32,7 @@
               </li>
           </ul>
           
-          <ul class="navbar-nav d-none" id="loggedInMenu" ng-show="isLoggedIn">
+          <ul class="navbar-nav " id="loggedInMenu" ng-show="isLoggedIn">
               <li class="nav-item">
                   <a class="nav-link" href="#!/mainPage">Főoldal</a>
               </li>
@@ -58,7 +58,7 @@
                   <a class="nav-link" href="#!/aboutUs">Rólunk</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" ng-click="logout()" href="#!/login">Kijelentkezés</a>
+                  <a class="nav-link" ng-click="logout(); removeitem();" href="#!/login">Kijelentkezés</a>
               </li>
           </ul>
           
@@ -79,7 +79,7 @@
         <script src="assets/js/ng-notify.min.js"></script>
         <script src="assets/js/angular-uuid.js"></script>
         <script src="assets/js/app.js"></script>
-
+       
         <script src="controllers/userCtrl.js"></script>
         
 </body>
