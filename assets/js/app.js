@@ -16,6 +16,7 @@ app.run(function($rootScope, $location) {
         $rootScope.isLoggedIn = false;
         $location.path('/login');
     }
+   
 });
 
 app.config(function($routeProvider) {
@@ -53,7 +54,8 @@ app.config(function($routeProvider) {
             templateUrl: '/views/vacsora.html'
         })
         .when('/myRecipes', {
-            templateUrl: '/views/sajatReceptek.html'
+            templateUrl: '/views/sajatReceptek.html',
+            controller: 'sajatreceptekCtrl'
         })
         .when('/aboutUs', {
             templateUrl: '/views/rolunk.html'
