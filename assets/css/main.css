@@ -401,3 +401,108 @@ footer{
         margin-right: 0;
     }
 }
+
+
+
+/* ------------ SAJÁT RECEPTEK CSS ----------*/
+
+.writecontent{
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(63, 63, 63) 5px 5px 10px;
+    border-radius: 2%;
+    max-width: 90%;
+    min-width: 90%;
+    max-height: 100%;
+    min-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+  
+}
+
+.felso3{
+    display: flex;
+    flex-direction: row;
+    padding-top: 1%;
+
+}
+
+.nagyinput{
+   max-width: 190% !important;
+   min-width: 190%!important;
+   height: 400px !important;
+   font-size: medium;
+   
+   
+}
+
+    
+    
+
+@media screen and (max-width: 767px) {
+    .nagyinput{
+        max-width: 90% !important;
+        min-width: 90%!important;
+     }
+}
+
+.felhasznalogomb{
+    padding-left: 2.5%;
+    padding-top: 2%;
+    padding-right: 2.5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.selectes{
+    max-width: 20%; 
+    margin: auto;
+}
+.meglevotext{
+    padding: 2% 5% 1%;
+     font-size: 170%;
+}
+
+@media screen and (max-width: 449px) {
+    .felhasznalogomb {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gombok {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 5%;
+        
+        
+    }
+    .felso3 {
+        
+        display: flex;
+        flex-direction: column;
+       
+        align-items: center; /* Tartalom központosítása a függőleges tengely mentén */
+        
+    }
+
+    .selectes{
+      
+        max-width: 90%; 
+        min-width: 90%; 
+        
+    }
+        
+    .egygomb{
+        width: 80%; /* Változtathatod a gombok szélességét a kívánt méretre */
+        padding-top: 5%;
+        
+    }
+    .meglevotext{
+        padding: 5% 5% 5%;
+        font-size:150%;
+    }
+        
+}
+
+/*-------------------------------------------*/
