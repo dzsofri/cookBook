@@ -504,5 +504,26 @@ footer{
     }
         
 }
+.zold{
+    background-color: #88AB8E; 
+    border: #88AB8E;
+    font-size: large;
+}
+.piros{
+    background-color: #F15A5A; 
+    border: #F15A5A;
+    font-size: large;
+}
+
+.zold:hover{
+    background-color: #66846b; 
+    border: #66846b;
+}
+
+.piros:hover{
+    background-color: #c14a4a; 
+    border: #c14a4a;
+    
+}
 
 /*-------------------------------------------*/

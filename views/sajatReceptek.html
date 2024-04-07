@@ -8,7 +8,7 @@
                 <img src="../assets/img/user.jpg" alt="UserPhoto" id="logo">
                 {{name}}</div> 
              <div class="gombok" class="egygomb"> 
-              <button class="btn btn-primary mb-3" ng-click="" style="background-color: #88AB8E; border: #88AB8E;font-size: large;">Feltöltés</button>
+              <button class="btn btn-primary mb-3 zold" ng-click="upload()" >Feltöltés</button>
             </div>
              
             </div>
@@ -34,7 +34,7 @@
                 </select>
               </div>
               <div class="input-group mb-3 selectes" >
-                <input type="text" class="form-control" placeholder="Étel neve" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Étel neve" aria-label="Username" aria-describedby="basic-addon1" id="newfoodname">
               </div>
             </div>
 
@@ -50,58 +50,17 @@
           </div>
             <div class="col-md-6" style="margin-left: 2.5%;">
               <!-- Nagy Bootstrap input mező -->
-              <textarea class="form-control nagyinput" style="height: 200px;" placeholder="Ide írd a receptet..."></textarea>
+              <textarea class="form-control nagyinput" style="height: 200px;" placeholder="Ide írd a receptet..." id="newrecipe"></textarea>
             </div>
             <br>
-          
+            <div class="meglevotext">Már meglévő receptjeid:</div>
+
         </div>
       
 
-        <div class="meglevotext">Már meglévő receptjeid:</div>
-
+        
           
-          <div class="writecontent">   
-            <div class="felhasznalogomb">
-              <div class="felhasznalo">
-                <img src="../assets/img/user.jpg" alt="UserPhoto" id="logo">
-                {{name}} 
-              </div>
-              <div class="gombok">
-                <button class="btn btn-primary mb-3" ng-click="" style="background-color: #88AB8E; border: #88AB8E;font-size: large;">Módosítás</button>
-                <button class="btn btn-primary mb-3" ng-click="" style="background-color: #F15A5A; border: #F15A5A;font-size: large;">Törlés</button>
-              </div>
-            </div>
-
-            <div class="felso3">
-              <div class="input-group mb-3 selectes" >
-                <select class="form-select" id="Type1Mod">
-                  <option selected>Válassz...</option>
-                  <option value="1">Reggeli</option>
-                  <option value="2">Ebéd</option>
-                  <option value="3">Vacsora</option>
-                </select>
-              </div>
-              <div class="input-group mb-3 selectes"  >
-                <select class="form-select" id="Type2Mod">
-                  <option selected>Válassz...</option>
-                  <option value="1">Előétel</option>
-                  <option value="2">Főétel</option>
-                  <option value="3">Köret</option>
-                  <option value="3">Desszert</option>
-                  <option value="0">Nem ebéd...</option>
-                </select>
-              </div>
-              <div class="input-group mb-3 selectes" >
-                <input type="text" class="form-control" placeholder="Étel neve" aria-label="Username" aria-describedby="basic-addon1">
-              </div>
-            </div>
-
-            <div class="col-md-6" style="margin-left: 2.5%;">
-              <!-- Nagy Bootstrap input mező -->
-              <textarea class="form-control nagyinput" style="height: 200px;" placeholder="Ide írd a receptet..."></textarea>
-            </div>
-            <br>
-          </div>
+         
           <br>
         </div>
       
