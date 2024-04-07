@@ -2,7 +2,7 @@
 app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
 
 
-    function register(){
+    $scope.register = function(){
 
         let name = document.querySelector('#name');
         let email = document.querySelector('#email');
@@ -35,38 +35,49 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
 
     };
 
-    $scope.login = function(){
+       // Bejelentkezés
+       $scope.login = function() {
         let name = document.querySelector('#name');
         let passwd = document.querySelector('#passwd');
-    
-        if (name.value == "" || passwd.value == "" ){
+
+        if (name.value == "" || passwd.value == "") {
             $scope.showMessage("Nem adtál meg minden adatot!");
-        }
-        else{
+        } else {
             let data = {
                 name: name.value,
                 passwd: passwd.value
-            }
-            axios.post(`http://localhost:3000/users`, data).then(res => {
-                if(res.data.length == 0){
+            };
+
+            axios.post(`http://localhost:3000/logincheck`, data).then(res => {
+                if (!res.data || Object.keys(res.data).length === 0) {
                     $scope.showMessage("Hibás belépési adatok!");
-                }else
-                {
-                    sessionStorage.setItem('CookBook', JSON.stringify(res.data));
+                } else {
+                    // Sikeres bejelentkezés esetén felhasználó adatainak tárolása munkamenetben
+                    localStorage.setItem('CookBookUser', JSON.stringify(data));
+                    $rootScope.isLoggedIn = true;
+                    
                     $location.path('/mainPage');
                 }
             });
+           
         }
     };
 
-    let user = sessionStorage.getItem('CookBook');
-
-
-
-    $scope.logout = function(){
-        sessionStorage.removeItem('CookBook');
-        
-        $location.path('/login');};
+    $scope.locationmain = function(){
+        $location.path('/mainPage');
+    }
+    $scope.removeitem = function(){
+        console.log('removeitem called');
+        localStorage.removeItem('CookBookUser');
+    }
+    
+    // Kijelentkezés
+    $scope.logout = function() {
+        localStorage.removeItem('CookBookUser');
+        $rootScope.isLoggedIn = false;
+        console.log(isLoggedIn);
+        $location.path('/login');
+    };
       
 
     $scope.showMessage = function(msg){
