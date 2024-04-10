@@ -17,6 +17,7 @@ app.run(function($rootScope, $location) {
         $location.path('/login');
     }
    
+   
 });
 
 app.config(function($routeProvider) {
@@ -60,7 +61,24 @@ app.config(function($routeProvider) {
         .when('/aboutUs', {
             templateUrl: '/views/rolunk.html'
         })
+        .when('/index',{
+            controller: 'mainCtrl'
+        })
         .otherwise({
             redirectTo: '/login'
+            
         });
+
+    
+});
+
+app.controller('mainCtrl', function($scope, $location, $rootScope) {
+    $scope.logout = function() {
+        // Töröld a felhasználói adatokat a localStorage-ból
+        localStorage.removeItem('CookBookUser');
+        // Állítsd be a bejelentkezési állapotot hamisra
+        $rootScope.isLoggedIn = false;
+        // Irányítsd át a felhasználót a bejelentkező oldalra
+        $location.path('/login');
+    };
 });

@@ -52,7 +52,11 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                     localStorage.setItem('CookBookUser', JSON.stringify(res.data));
                     $rootScope.isLoggedIn = true; // Bejelentkezési állapot beállítása
                     $location.path('/mainPage'); // Átirányítás a főoldalra
+                    $rootScope.$apply(function() {
+                        $location.path('/mainPage');
+                    });
                 }
+               
             })
             .catch(err => {
                 // Hibakezelés
@@ -61,21 +65,9 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
     };
 
 
-    $scope.locationmain = function(){
-        $location.path('/mainPage');
-    }
-    $scope.removeitem = function(){
-        console.log('removeitem called');
-        localStorage.removeItem('CookBookUser');
-    }
+   
     
-    // Kijelentkezés
-    $scope.logout = function() {
-        localStorage.removeItem('CookBookUser');
-        $rootScope.isLoggedIn = false;
-        console.log(isLoggedIn);
-        $location.path('/login');
-    };
+   
       
 
     $scope.showMessage = function(msg){
