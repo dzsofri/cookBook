@@ -36,32 +36,30 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
     };
 
        // Bejelentkezés
-       $scope.login = function() {
-        let name = document.querySelector('#name');
-        let passwd = document.querySelector('#passwd');
+    $scope.login = function() {
+        // Felhasználónév és jelszó begyűjtése
+        let name = document.querySelector('#name').value;
+        let passwd = document.querySelector('#passwd').value;
 
-        if (name.value == "" || passwd.value == "") {
-            $scope.showMessage("Nem adtál meg minden adatot!");
-        } else {
-            let data = {
-                name: name.value,
-                passwd: passwd.value
-            };
-
-            axios.post(`http://localhost:3000/logincheck`, data).then(res => {
+        // Adatok küldése a szervernek
+        axios.post(`http://localhost:3000/logincheck`, { name: name, passwd: passwd })
+            .then(res => {
                 if (!res.data || Object.keys(res.data).length === 0) {
+                    // Hibás bejelentkezési adatok esetén üzenet megjelenítése
                     $scope.showMessage("Hibás belépési adatok!");
                 } else {
-                    // Sikeres bejelentkezés esetén felhasználó adatainak tárolása munkamenetben
-                    localStorage.setItem('CookBookUser', JSON.stringify(data));
-                    $rootScope.isLoggedIn = true;
-                    
-                    $location.path('/mainPage');
+                    // Sikeres bejelentkezés esetén felhasználó adatainak elmentése a localStorage-ba
+                    localStorage.setItem('CookBookUser', JSON.stringify(res.data));
+                    $rootScope.isLoggedIn = true; // Bejelentkezési állapot beállítása
+                    $location.path('/mainPage'); // Átirányítás a főoldalra
                 }
+            })
+            .catch(err => {
+                // Hibakezelés
+                console.error('Bejelentkezési hiba:', err);
             });
-           
-        }
     };
+
 
     $scope.locationmain = function(){
         $location.path('/mainPage');

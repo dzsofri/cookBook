@@ -251,7 +251,8 @@ footer{
     max-height: 173px;
     width: 100%;
     height: 100%;
-    margin: 12px;
+
+    margin-top: 8%;
     display: flex;
     flex-direction: row;
     justify-content: left !important;    
@@ -319,18 +320,21 @@ footer{
 }
 
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
     .card1{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .card2{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .card3{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .cards img{
         max-width: 338px;
@@ -503,6 +507,27 @@ footer{
         font-size:150%;
     }
         
+}
+.zold{
+    background-color: #88AB8E; 
+    border: #88AB8E;
+    font-size: large;
+}
+.piros{
+    background-color: #F15A5A; 
+    border: #F15A5A;
+    font-size: large;
+}
+
+.zold:hover{
+    background-color: #66846b; 
+    border: #66846b;
+}
+
+.piros:hover{
+    background-color: #c14a4a; 
+    border: #c14a4a;
+    
 }
 
 /*-------------------------------------------*/
