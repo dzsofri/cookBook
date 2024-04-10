@@ -86,6 +86,23 @@ const torlesButton = document.createElement('button');
 torlesButton.classList.add('btn', 'btn-primary', 'm-3', 'piros');
 torlesButton.textContent = 'Törlés';
 
+
+
+$scope.deleteRecipe = function(recipeId) {
+    axios.delete(`http://localhost:3000/receptek/${recipeId}`)
+        .then(function(response) {
+            // Sikeres törlés esetén üzenet megjelenítése
+            alert('Recept sikeresen törölve');
+            // Újra betöltjük a felhasználó saját receptjeit
+            $scope.showOwnRecipes();
+        })
+        .catch(function(error) {
+            // Hibakezelés, ha nem sikerült törölni a receptet
+            console.error('Hiba történt a recept törlése során:', error);
+        });
+};
+
+
 gombok.appendChild(modositasButton);
 gombok.appendChild(torlesButton);
 
@@ -234,12 +251,57 @@ const input = document.createElement('input');
 input.type = 'text';
 input.classList.add('form-control');
 input.placeholder = 'Étel neve';
+input.value = recipe.id;
+input.setAttribute('aria-label', 'Username');
+input.setAttribute('aria-describedby', 'basic-addon1');
+
+const input2 = document.createElement('input');
+input.type = 'text';
+input.classList.add('form-control');
+input.placeholder = 'Étel neve';
 input.value = recipe.name;
 input.setAttribute('aria-label', 'Username');
 input.setAttribute('aria-describedby', 'basic-addon1');
 
-
+inputGroup.appendChild(input2);
 inputGroup.appendChild(input);
+torlesButton.addEventListener('click', function() {
+    // Receptek lekérése
+    axios.get('http://localhost:3000/receptek')
+        .then(res => {
+            alert('Receptek sikeresen lekérve');
+            
+            // Keresés a receptek között
+            let recipeIdToDelete = null;
+            const recipeNameToDelete = input.value; // Az adott recept neve, amelyet törölni szeretnél
+            alert(recipeNameToDelete);
+            // Ellenőrizzük, hogy a változó tartalmazza-e a helyes recept nevet
+            if (!recipeNameToDelete) {
+                console.error('Nem választottál ki receptet a törléshez');
+                return;
+            }
+
+            res.data.forEach(recipe => {
+                if (recipe.name === recipeNameToDelete) {
+                    axios.delete(`http://localhost:3000/receptek/${recipe.id}`)
+                    .then(function(response) {
+                        // Sikeres törlés esetén üzenet megjelenítése
+                        alert('Recept sikeresen törölve');
+                        // Újra betöltjük a felhasználó saját receptjeit
+                        $scope.showOwnRecipes();
+                    })
+                    .catch(function(error) {
+                        // Hibakezelés, ha nem sikerült törölni a receptet
+                        console.error('Hiba történt a recept törlése során:', error);
+                    });
+                }
+            });
+
+           
+        })
+        
+});
+
 
 felso3.appendChild(type1Mod);
 felso3.appendChild(type2Mod);
@@ -277,8 +339,8 @@ writecontent.appendChild(colMd6);
     $scope.showOwnRecipes();
 
 
-
-
+   
+    
 
 
 
