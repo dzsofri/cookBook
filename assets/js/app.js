@@ -31,28 +31,36 @@ app.config(function($routeProvider) {
             controller: 'userCtrl'
         })
         .when('/mainPage', {
-            templateUrl: '/views/fooldal.html'
+            templateUrl: '/views/fooldal.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/breakfast', {
-            templateUrl: '/views/reggeli.html'
+            templateUrl: '/views/reggeli.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/lunch', {
-            templateUrl: '/views/ebed.html'
+            templateUrl: '/views/ebed.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/appetizer', {
-            templateUrl: '/views/eloetel.html'
+            templateUrl: '/views/eloetel.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/mainCourse', {
-            templateUrl: '/views/foetel.html'
+            templateUrl: '/views/foetel.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/sideDish', {
-            templateUrl: '/views/koret.html'
+            templateUrl: '/views/koret.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/dessert', {
-            templateUrl: '/views/desszert.html'
+            templateUrl: '/views/desszert.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/dinner', {
-            templateUrl: '/views/vacsora.html'
+            templateUrl: '/views/vacsora.html',
+            controller: 'dinamikusCtrl'
         })
         .when('/myRecipes', {
             templateUrl: '/views/sajatReceptek.html',
