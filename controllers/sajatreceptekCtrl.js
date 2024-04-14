@@ -40,6 +40,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
           
             // Példa: Létrehozunk egy DOM elemet minden receptre
             ownRecipes.forEach(function(recipe) {
+                
                 if (recipe.userID == user) {
                    
                     // Kiválasztjuk a writecontent osztályú konténert
@@ -69,7 +70,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     gombok.classList.add('gombok');
 
                     const modositasButton = document.createElement('button');
-                    modositasButton.classList.add('btn', 'btn-primary', 'm-3', 'zold');
+                    modositasButton.classList.add('btn', 'btn-primary', 'm-3', 'zold', 'd-none');
                     modositasButton.textContent = 'Módosítás';
 
                     const torlesButton = document.createElement('button');
@@ -284,31 +285,12 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     textarea.value = recipe.recipe;
                     colMd6.appendChild(textarea);
                     modositasButton.addEventListener('click', function() {
+                        
+                        update()
+                        
+                        // Elküldjük a módosított recept adatait a szervernek
                        
                         
-                        // Itt gyűjtsd össze az összes szükséges adatot a felhasználó által kitöltött mezőkből
-                        let updatedRecipe = {
-                            
-                            
-                            ID: recipe.ID,
-                            userID: JSON.parse(localStorage.getItem('CookBookUser')),
-                            name: input2.value, // itt közvetlenül hivatkozz a változóra
-                            recipe: textarea.value, // itt közvetlenül hivatkozz a változóra
-                            type1: JSON.parse( select1.value), // itt közvetlenül hivatkozz a változóra
-                            type2: JSON.parse( select2.value), // itt közvetlenül hivatkozz a változóra
-                        };
-                       
-                        
-                    console.log(updatedRecipe)
-
-                        axios.patch(`http://localhost:3000/receptek/${recipe.ID}`, updatedRecipe)
-                            .then(response => {
-                                console.log("Recept sikeresen módosítva");
-                            })
-                            .catch(error => {
-                                console.error("Hiba történt a recept módosítása során:", error);
-                            });
-                    
                     
                         
                   });
@@ -320,8 +302,27 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     writecontent.appendChild(colMd6);
 
                    
-                }
-            });
+             
+                function update(){
+                    axios.patch(`http://localhost:3000/receptek/${recipe.ID}`, {
+                        ID:recipe.ID,
+                        userID: JSON.parse(localStorage.getItem('CookBookUser')),
+                        name: input2.value, // input2 változóra hivatkozunk
+                        recipe: textarea.value, // textarea változóra hivatkozunk
+                        type1: JSON.parse(select1.value), // select1 változóra hivatkozunk
+                        type2: JSON.parse(select2.value), // select2 változóra hivatkozunk
+                    })
+                        .then(function(response) {
+                            // Sikeres válasz esetén frissítjük a felületet vagy megjelenítünk egy üzenetet
+                            alert("Recept sikeresen módosítva");
+                        })
+                        .catch(function(error) {
+                            // Hibakezelés, ha valami nem sikerült
+                            console.error("Hiba történt a recept módosítása során:", error);
+                            alert("Hiba történt a recept módosítása során");
+                        });
+                }}
+                });   
         }).catch(function(error) {
             // Hibakezelés, ha nem sikerült lekérni a recepteket
             console.error('Hiba történt a saját receptek lekérdezése során:', error);
@@ -343,6 +344,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
             console.error('Hiba történt a hálózati kérés során:', error);
         });
     }
+
    
     $scope.showOwnRecipes();
     

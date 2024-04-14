@@ -86,15 +86,34 @@ app.post('/:table', (req, res)=>{
 });
 
 
-// PATCH one item by PK
-app.patch('/receptek/:pk', (req, res)=>{
-  let pk = req.params.pk;
-  let data = req.body;
-  pool.query(`UPDATE receptek SET ID='${data.ID}', userID='${data.userID}', name='${data.name}',recipe='${data.recipe}', type1='${data.type1}, type2='${data.type2}'WHERE ID=?`, pk, (error, results) => {
-      if (error) res.status(500).send(error);
-      res.status(200).send(results);
+// PATCH record in table by field (update)
+app.patch('/:table/:field/:op/:value', (req, res) => {
+  let table = req.params.table;
+  let field = req.params.field;
+  let value = req.params.value;
+  let op = getOperator(req.params.op);
+
+  if (op == ' like '){
+    value = `%${value}%`;
+  }
+
+  let values = Object.values(req.body);
+  let fields = Object.keys(req.body);
+
+  let sql = '';
+  for(i=0; i< values.length; i++){
+    sql += fields[i] + `='` + values[i] + `'`;
+    if (i< values.length-1) {
+      sql += ',';
+    } 
+  }
+
+  pool.query(`UPDATE ${table} SET ${sql} WHERE ${field}${op}'${value}'`, (err, results)=>{
+    sendResults(table, err, results, req, res, 'updated in');
   });
+
 });
+
 // DELETE one record by ID
 app.delete('/:table/:id', (req, res) => {
   let table = req.params.table;
