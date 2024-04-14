@@ -18,7 +18,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                 recipe: newrecipe.value,
                 type1: Type1Uj.value,
                 type2: Type2Uj.value,
-                img: imageInput.files[0]
+                
             };
             axios.post('http://localhost:3000/receptek', newRecipe).then(res => {
                 alert('Recept sikeresen hozzáadva');
