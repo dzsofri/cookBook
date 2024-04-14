@@ -410,10 +410,17 @@ footer{
 
 /* ------------ SAJÁT RECEPTEK CSS ----------*/
 
+.longbob-image{
+    max-height: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Árnyék hozzáadása a képhez */
+    
+}
+
 .writecontent{
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(63, 63, 63) 5px 5px 10px;
-    border-radius: 2%;
+   
     max-width: 90%;
     min-width: 90%;
     max-height: 100%;

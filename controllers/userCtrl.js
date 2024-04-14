@@ -49,7 +49,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                     $scope.showMessage("Hibás belépési adatok!");
                 } else {
                     // Sikeres bejelentkezés esetén felhasználó adatainak elmentése a localStorage-ba
-                    localStorage.setItem('CookBookUser', JSON.stringify(res.data));
+                    localStorage.setItem('CookBookUser', JSON.stringify(res.data[0].ID));
                     $rootScope.isLoggedIn = true; // Bejelentkezési állapot beállítása
                     $location.path('/mainPage'); // Átirányítás a főoldalra
                     $rootScope.$apply(function() {
