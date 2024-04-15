@@ -526,3 +526,9 @@ footer{
 }
 
 /*-------------------------------------------*/
+
+@media screen and (min-width: 1001px) {
+    .rolunknevek{
+        padding-right: 5%;
+    }
+}

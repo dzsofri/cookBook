@@ -175,24 +175,8 @@ function getOperator(op){
 
 
 
-const fs = require('fs');
 
-const path = require('path');
 
-app.delete('/delete-image/:imageName', (req, res) => {
-    const imageName = req.params.imageName;
-    const imagePath = path.join(__dirname, 'assets', 'img', 'receptképek', imageName);
-
-    fs.unlink(imagePath, (err) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Hiba történt a kép törlése során');
-        } else {
-            console.log(`A(z) ${imageName} nevű kép sikeresen törölve lett.`);
-            res.status(200).send('A kép sikeresen törölve lett');
-        }
-    });
-});
 app.listen(port, () => {
   console.log(`Server listening on port ${port}...`);
 });

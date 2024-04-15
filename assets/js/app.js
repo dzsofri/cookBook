@@ -69,9 +69,7 @@ app.config(function($routeProvider) {
         .when('/aboutUs', {
             templateUrl: '/views/rolunk.html'
         })
-        .when('/index',{
-            controller: 'mainCtrl'
-        })
+        
         .otherwise({
             redirectTo: '/login'
             
