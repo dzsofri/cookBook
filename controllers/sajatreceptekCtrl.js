@@ -1,43 +1,66 @@
 app.controller('sajatreceptekCtrl', function($scope, $http) {
     
+ 
     $scope.upload = function() {
+        // Új recept létrehozása az űrlap adatai alapján
         let Type1Uj = document.querySelector('#Type1Uj');
         let Type2Uj = document.querySelector('#Type2Uj');
         let newfoodname = document.querySelector('#newfoodname');
         let imageInput = document.querySelector('#imageInput');
         let newrecipe = document.querySelector('#newrecipe');
-
-        const userID = JSON.parse(localStorage.getItem('CookBookUser'));
-        
+    
+        // Ellenőrizzük, hogy minden adat meg lett-e adva
         if (Type1Uj.value == null || Type2Uj.value == null || newfoodname.value == "" || imageInput.value == null || newrecipe.value == "") {
-            $scope.showMessage("Nem adtál meg minden adatot!");
+            $scope.alert("Nem adtál meg minden adatot!");
         } else {
+            // Ha minden adat meg van adva, létrehozzuk az új recept objektumot
             let newRecipe = {
-                userID: userID,
+                userID: JSON.parse(localStorage.getItem('CookBookUser')),
                 name: newfoodname.value,
                 recipe: newrecipe.value,
                 type1: Type1Uj.value,
                 type2: Type2Uj.value,
-                
             };
-            axios.post('http://localhost:3000/receptek', newRecipe).then(res => {
-                alert('Recept sikeresen hozzáadva');
-                Type1Uj.value = null;
-                Type2Uj.value = null;
-                newfoodname.value = "";
-                imageInput.value = null;
-                newrecipe.value = "";
+    
+            // Az új recept hozzáadása a szerverhez
+            axios.post('http://localhost:3000/receptek', newRecipe)
+            .then(res => {
+                // Ha a recept sikeresen hozzá lett adva, kép feltöltése
+                const formData = new FormData();
+                formData.append('file', imageInput.files[0], `${res.data.ID}.jpg`);
+    
+                // Kép feltöltése a megfelelő mappába, a recept ID-ja alapján
+                axios.post('http://localhost:3000/upload', formData)
+                .then(uploadRes => {
+                    // Sikeres képfeltöltés esetén kiírjuk az üzenetet
+                    alert('Recept sikeresen hozzáadva');
+                    // Input mezők tartalmának ürítése
+                    Type1Uj.value = null;
+                    Type2Uj.value = null;
+                    newfoodname.value = "";
+                    imageInput.value = null;
+                    newrecipe.value = "";
+                })
+                .catch(uploadErr => {
+                    // Hibakezelés, ha valami probléma merül fel a kép feltöltése során
+                    console.error('Hiba történt a kép feltöltése során:', uploadErr);
+                });
+            })
+            .catch(err => {
+                // Hibakezelés, ha valami probléma merül fel a recept hozzáadása során
+                console.error('Hiba történt a recept hozzáadása során:', err);
             });
         }
     };
-
+    
     $scope.showOwnRecipes = function() {
         // Felhasználó azonosítójának lekérése a localStorage-ból
         const user = JSON.parse(localStorage.getItem('CookBookUser'));
         axios.get(`http://localhost:3000/receptek/`).then(function(response) {
             // Sikeres lekérdezés esetén a válasz tartalmazza a felhasználó saját receptjeit
             let ownRecipes = response.data;
-          
+            
+      
             // Példa: Létrehozunk egy DOM elemet minden receptre
             ownRecipes.forEach(function(recipe) {
                 
@@ -193,30 +216,24 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     h1.textContent = 'Kép feltöltése';
 
                     fileUploadDiv.appendChild(h1);
-
-                    // Div létrehozása a form-labelel és a fájl feltöltő mezővel
-                    const fileUploadGroupDiv = document.createElement('div');
+const fileUploadGroupDiv = document.createElement('div');
                     fileUploadGroupDiv.classList.add('mb-3');
                     fileUploadGroupDiv.style.display='flex';
                     fileUploadGroupDiv.style.justifyContent='center';
                     fileUploadGroupDiv.style.height = '400px';
-
                     const longbobImage = document.createElement('img');
                     longbobImage.src = `..//assets/img/receptképek/${recipe.ID}.jpg`;
-                     // A kép elérési útja a recept neve alapján
-                    longbobImage.alt = recipe.name; // Alt attribútum beállítása a recept nevével
+                    longbobImage.alt = recipe.name;
+                    longbobImage.classList.add('longbob-image');
+                    fileUploadGroupDiv.appendChild(longbobImage);
+                    
                   
+
+                    // Div létrehozása a form-labelel és a fájl feltöltő mezővel
                     
 
-                    longbobImage.classList.add('longbob-image'); // Adjunk osztályt a képnek a stílusozáshoz
-                    fileUploadGroupDiv.appendChild(longbobImage);
-
                     // Címke létrehozása
-                    const label = document.createElement('label');
-                    label.setAttribute('for', 'imageInput');
-                    label.classList.add('form-label');
-                    label.textContent = 'Kép kiválasztása';
-                    fileUploadDiv.appendChild(label);
+                    
 
                     // Fájl feltöltő mező létrehozása
                     const fileInput = document.createElement('input');
@@ -247,6 +264,9 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     torlesButton.addEventListener('click', function() {
                         
                       console.log(recipe.ID);
+                      const confirmation = confirm("Biztosan szeretnéd törölni ezt a receptet?");
+                        
+                        if (confirmation) {
                         axios.delete(`http://localhost:3000/receptek/${recipe.ID}`)
                         .then(response => {
                             if (response.status === 200) {
@@ -265,10 +285,50 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                         })
                         .catch(error => {
                             console.error('Hiba történt a recept törlése során:', error);
-                        });
+                        });}
+                        else{}
 
                     });
-                   
+                    modositasButton.addEventListener('click', function() {
+                        // Módosítás gombra kattintva megjelenítjük a felugró ablakot
+                        const confirmation = confirm("Biztosan szeretnéd módosítani ezt a receptet?");
+                        
+                        if (confirmation) {
+                            // Felugró ablak elfogadása esetén
+                            // Elkérjük a felhasználó által módosított adatokat (például egy űrlap segítségével)
+                            // Majd elküldjük ezeket az adatokat az adatbázisba a recept módosításához
+                            const modifiedRecipe = {
+                                ID:recipe.ID,
+                                userID:JSON.parse(localStorage.getItem('CookBookUser')),
+                                name: input2.value, // Az étel nevének módosítása az input mező értékével
+                                recipe: textarea.value, // A recept módosítása a textarea értékével
+                                type1: select1.value, // Az első típus módosítása a select1 értékével
+                                type2: select2.value // A második típus módosítása a select2 értékével
+                                // Egyéb módosítások...
+                            };
+                            console.log(modifiedRecipe)
+                            // Axios segítségével küldjük el a módosított receptet a szerverre
+                            axios.post(`http://localhost:3000/receptek/${recipe.ID}`, modifiedRecipe)
+                            .then(response => {
+                                // Sikeres módosítás esetén frissítsük az adatokat a felületen
+                                alert('Recept sikeresen módosítva');
+                                // Esetlegesen frissíthetjük a felhasználói felületet, hogy az új adatok megjelenjenek
+                            })
+                            .catch(error => {
+                                // Hibakezelés, ha valami nem sikerült a módosítás során
+                                console.error('Hiba történt a recept módosítása során:', error);
+                            });
+
+
+
+
+
+                            
+                        } else {
+                            // Felugró ablak elutasítása esetén nem kell semmit tenni
+                        }
+                    });
+                    
 
                     felso3.appendChild(type1Mod);
                     felso3.appendChild(type2Mod);
@@ -284,16 +344,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     textarea.placeholder = 'Ide írd a receptet...';
                     textarea.value = recipe.recipe;
                     colMd6.appendChild(textarea);
-                    modositasButton.addEventListener('click', function() {
-                        
-                        update()
-                        
-                        // Elküldjük a módosított recept adatait a szervernek
-                       
-                        
-                    
-                        
-                  });
+                  
 
                     writecontent.appendChild(felhasznalogomb);
                     writecontent.appendChild(felso3);
@@ -303,47 +354,15 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
 
                    
              
-                function update(){
-                    axios.patch(`http://localhost:3000/receptek/${recipe.ID}`, {
-                        ID:recipe.ID,
-                        userID: JSON.parse(localStorage.getItem('CookBookUser')),
-                        name: input2.value, // input2 változóra hivatkozunk
-                        recipe: textarea.value, // textarea változóra hivatkozunk
-                        type1: JSON.parse(select1.value), // select1 változóra hivatkozunk
-                        type2: JSON.parse(select2.value), // select2 változóra hivatkozunk
-                    })
-                        .then(function(response) {
-                            // Sikeres válasz esetén frissítjük a felületet vagy megjelenítünk egy üzenetet
-                            alert("Recept sikeresen módosítva");
-                        })
-                        .catch(function(error) {
-                            // Hibakezelés, ha valami nem sikerült
-                            console.error("Hiba történt a recept módosítása során:", error);
-                            alert("Hiba történt a recept módosítása során");
-                        });
-                }}
+              
+            }
                 });   
         }).catch(function(error) {
             // Hibakezelés, ha nem sikerült lekérni a recepteket
             console.error('Hiba történt a saját receptek lekérdezése során:', error);
         });
     };
-    function deleteImage(imageName) {
-        axios.delete(`/assets/img/receptképek/${imageName}`)
-        
-
-        .then(response => {
-            if (response.ok) {
-                console.log('A kép sikeresen törölve lett');
-                // Itt szükség lehet a DOM frissítésére, hogy a kép eltűnjön a felhasználói felületről
-            } else {
-                console.error('Hiba történt a kép törlése során');
-            }
-        })
-        .catch(error => {
-            console.error('Hiba történt a hálózati kérés során:', error);
-        });
-    }
+   
 
    
     $scope.showOwnRecipes();
