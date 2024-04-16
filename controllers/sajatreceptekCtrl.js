@@ -8,6 +8,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
         let newfoodname = document.querySelector('#newfoodname');
         let imageInput = document.querySelector('#imageInput');
         let newrecipe = document.querySelector('#newrecipe');
+        let dinamika = document.querySelectorAll('.dinamika');
     
         // Ellenőrizzük, hogy minden adat meg lett-e adva
         if (Type1Uj.value == null || Type2Uj.value == null || newfoodname.value == "" || imageInput.value == null || newrecipe.value == "") {
@@ -25,13 +26,10 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
             // Az új recept hozzáadása a szerverhez
             axios.post('http://localhost:3000/receptek', newRecipe)
             .then(res => {
-                // Ha a recept sikeresen hozzá lett adva, kép feltöltése
-                const formData = new FormData();
-                formData.append('file', imageInput.files[0], `${res.data.ID}.jpg`);
-    
+                
+               
                 // Kép feltöltése a megfelelő mappába, a recept ID-ja alapján
-                axios.post('http://localhost:3000/upload', formData)
-                .then(uploadRes => {
+               
                     // Sikeres képfeltöltés esetén kiírjuk az üzenetet
                     alert('Recept sikeresen hozzáadva');
                     // Input mezők tartalmának ürítése
@@ -41,11 +39,8 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                     imageInput.value = null;
                     newrecipe.value = "";
                 })
-                .catch(uploadErr => {
-                    // Hibakezelés, ha valami probléma merül fel a kép feltöltése során
-                    console.error('Hiba történt a kép feltöltése során:', uploadErr);
-                });
-            })
+                
+           
             .catch(err => {
                 // Hibakezelés, ha valami probléma merül fel a recept hozzáadása során
                 console.error('Hiba történt a recept hozzáadása során:', err);
@@ -54,6 +49,9 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
     };
     
     $scope.showOwnRecipes = function() {
+        const dinamika = document.querySelector('.dinamika');
+        dinamika.innerHTML = '';
+    
         // Felhasználó azonosítójának lekérése a localStorage-ból
         const user = JSON.parse(localStorage.getItem('CookBookUser'));
         axios.get(`http://localhost:3000/receptek/`).then(function(response) {
@@ -236,14 +234,9 @@ const fileUploadGroupDiv = document.createElement('div');
                     
 
                     // Fájl feltöltő mező létrehozása
-                    const fileInput = document.createElement('input');
-                    fileInput.type = 'file';
-                    fileInput.classList.add('form-control');
-                    fileInput.style.width='95%';
-                    fileInput.style.marginLeft='2.5%';
-                    fileInput.id = 'imageInput';
-                    fileInput.src = recipe.img;
-                    fileUploadGroupDiv.appendChild(fileInput);
+                    
+                    
+                   
 
                     // Div elem hozzáadása a fő divhez
                     fileUploadDiv.appendChild(fileUploadGroupDiv);
@@ -270,17 +263,7 @@ const fileUploadGroupDiv = document.createElement('div');
                         axios.delete(`http://localhost:3000/receptek/${recipe.ID}`)
                         .then(response => {
                             if (response.status === 200) {
-                                axios.delete(`/assets/img/receptképek/${recipe.ID}.jpg`)
-                                .then(response => {
-                               
-                                    // Oldal frissítése a recept törlése után
-                                     console.log('A recept sikeresen törölve lett');
-                                     
-                              
-                                    })
-                                    .catch(error => {
-                                        console.error('Hiba történt a hálózati kérés során:', error.response.status, error.response.statusText);
-                                      });
+                                $scope.showOwnRecipes();
                             }
                         })
                         .catch(error => {
@@ -346,11 +329,11 @@ const fileUploadGroupDiv = document.createElement('div');
                     colMd6.appendChild(textarea);
                   
 
-                    writecontent.appendChild(felhasznalogomb);
-                    writecontent.appendChild(felso3);
-                    writecontent.appendChild(fileUploadGroupDiv);
-                    writecontent.appendChild(fileInput);
-                    writecontent.appendChild(colMd6);
+                    dinamika.appendChild(felhasznalogomb);
+                    dinamika.appendChild(felso3);
+                    dinamika.appendChild(fileUploadGroupDiv);
+                   
+                    dinamika.appendChild(colMd6);
 
                    
              
