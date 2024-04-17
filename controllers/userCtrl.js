@@ -3,44 +3,66 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
 
 
     $scope.register = function(){
-
-        let name = document.querySelector('#name');
-        let email = document.querySelector('#email');
-        let passwd = document.querySelector('#passwd');
-        let confirm = document.querySelector('#confirm');
+        let name = document.querySelector('#name').value;
+        let email = document.querySelector('#email').value;
+        let passwd = document.querySelector('#passwd').value;
+        let confirm = document.querySelector('#confirm').value;
     
-        if (name.value == "" || email.value == "" || passwd.value == "" || confirm.value == ""){
+        if (name == "" || email == "" || passwd == "" || confirm == ""){
             $scope.showMessage("Nem adtál meg minden adatot!");
         }
-        else{
-            if (passwd.value != confirm.value){
+        else {
+            if (passwd != confirm){
                 $scope.showMessage("A megadott jelszavak nem egyeznek!");
             }
-            else
-            {
-                
-                let newUser = {
-                    name: name.value,
-                    email: email.value,
-                    passwd: passwd.value
-                }; 
-                axios.post('http://localhost:3000/users', newUser).then(res =>{
-                    alert('Sikeres regisztráció! Most már beléphetsz!');
-                    name.text = "";
-                    
-                    $location.path('/login');
-                });
+            else {
+                // Ellenőrizze, hogy a felhasználónév létezik-e
+                axios.post('http://localhost:3000/logincheck', { name: name })
+                    .then(res => {
+                        if (res.data && res.data.length > 0) {
+                            // Ha már létezik ilyen felhasználónév, jelenítse meg az üzenetet
+                            $scope.showMessage("Ez a felhasználónév már foglalt!");
+                        } else {
+                            // Ha a felhasználónév még nem foglalt, regisztrálja az új felhasználót
+                            let newUser = {
+                                name: name,
+                                email: email,
+                                passwd: passwd
+                            }; 
+                            axios.post('http://localhost:3000/users', newUser)
+                                .then(res =>{
+                                    
+                                    // Törölje az input mezők tartalmát
+                                    document.querySelector('#name').value = "";
+                                    document.querySelector('#email').value = "";
+                                    document.querySelector('#passwd').value = "";
+                                    document.querySelector('#confirm').value = "";
+                                    $location.path('/login');
+                                    $rootScope.$apply(function() {
+                                        $location.path('/login');
+                                    });
+                                })
+                                .catch(err => {
+                                    console.error('Regisztrációs hiba:', err);
+                                });
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Felhasználónév ellenőrzési hiba:', err);
+                    });
             }
         }
-
     };
-
+    
        // Bejelentkezés
     $scope.login = function() {
         // Felhasználónév és jelszó begyűjtése
         let name = document.querySelector('#name').value;
         let passwd = document.querySelector('#passwd').value;
-
+        if (name == ""  || passwd == "" ){
+            $scope.showMessage("Nem adtál meg minden adatot!");
+        }
+        else  {
         // Adatok küldése a szervernek
         axios.post(`http://localhost:3000/logincheck`, { name: name, passwd: passwd })
             .then(res => {
@@ -62,6 +84,7 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                 // Hibakezelés
                 console.error('Bejelentkezési hiba:', err);
             });
+            }
     };
 
 
