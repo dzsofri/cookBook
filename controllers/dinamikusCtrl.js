@@ -18,7 +18,7 @@ app.controller('dinamikusCtrl', function($scope, $http) {
                     image.alt = ""; // Adj hozzá az alt attribútumot, ha szükséges
                     cardImage.appendChild(image);
                     cardDiv.appendChild(cardImage);
-    
+                    
                     // Kártya szöveg elem létrehozása és tartalmának beállítása
                     let cardText = document.createElement("div");
                     cardText.classList.add("card-text");

@@ -40,15 +40,16 @@
               <li class="nav-item">
                   <a class="nav-link" href="#!/breakfast">Reggeli</a>
               </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!/lunch" role="button" aria-haspopup="true" aria-expanded="false">Ebéd</a>
-                  <div class="dropdown-menu">      
-                      <a class="dropdown-item" href="#!/appetizer">Előétel</a>      
-                      <a class="dropdown-item" href="#!/mainCourse">Főétel</a>      
-                      <a class="dropdown-item" href="#!/sideDish">Köret</a>
-                      <a class="dropdown-item" href="#!/dessert">Desszert</a>
-                  </div>
-              </li>
+              <li class="nav-item dropdown"ng-mouseover="isDropdownOpen = true" ng-mouseleave="isDropdownOpen = false" ng-class="{'show': isDropdownOpen}" >
+                <a class="nav-link" href="#!/lunch">Ebéd</a>
+                <div class="dropdown-menu" ng-class="{'show': isDropdownOpen}">
+                    <a class="dropdown-item" href="#!/appetizer">Előétel</a>
+                    <a class="dropdown-item" href="#!/mainCourse">Főétel</a>
+                    <a class="dropdown-item" href="#!/sideDish">Köret</a>
+                    <a class="dropdown-item" href="#!/dessert">Desszert</a>
+                </div>
+            </li>
+            
               <li class="nav-item">
                   <a class="nav-link" href="#!/dinner">Vacsora</a>
               </li>

@@ -2,17 +2,7 @@
 
 var app = angular.module('app', ['ngRoute', 'ngNotify', 'angular-uuid']);
 
-app.run(function($rootScope, $location) {
-    $rootScope.serverUrl = 'http://localhost:3000';
-    $rootScope.company = 'CookBook';
-    $rootScope.year = new Date().getFullYear();
 
-    // Ellenőrizze, hogy a felhasználó be van-e jelentkezve
-    
-    
-   
-   
-});
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -42,6 +32,9 @@ app.controller('mainCtrl', function($scope, $location, $rootScope) {
 var app = angular.module('app', ['ngRoute', 'ngNotify', 'angular-uuid']);
 
 app.run(function($rootScope, $location) {
+    $rootScope.serverUrl = 'http://localhost:3000';
+    $rootScope.company = 'CookBook';
+    $rootScope.year = new Date().getFullYear();
     // Figyeld az útvonalváltozást
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
         // Mentsd el az aktuális útvonalat a localStorage-be
@@ -128,4 +121,5 @@ app.controller('mainCtrl', function($scope, $location, $rootScope) {
         // Irányítsd át a felhasználót a bejelentkező oldalra
         $location.path('/login');
     };
+   
 });
