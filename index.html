@@ -31,34 +31,57 @@
               <li class="nav-item">
                   <a class="nav-link" href="#!/register">Regisztráció</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#!/mainPage">Főoldal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/breakfast">Reggeli</a>
+            </li>
+            <li class="nav-item dropdown"ng-mouseover="isDropdownOpen = true" ng-mouseleave="isDropdownOpen = false" ng-class="{'show': isDropdownOpen}" >
+              <a class="nav-link" href="#!/lunch">Ebéd</a>
+              <div class="dropdown-menu" ng-class="{'show': isDropdownOpen}">
+                  <a class="dropdown-item" href="#!/appetizer">Előétel</a>
+                  <a class="dropdown-item" href="#!/mainCourse">Főétel</a>
+                  <a class="dropdown-item" href="#!/sideDish">Köret</a>
+                  <a class="dropdown-item" href="#!/dessert">Desszert</a>
+              </div>
+          </li>
+          
+            <li class="nav-item">
+                <a class="nav-link" href="#!/dinner">Vacsora</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/aboutUs">Rólunk</a>
+            </li>
           </ul>
           
           <ul class="navbar-nav " id="loggedInMenu" ng-show="isLoggedIn">
-              <li class="nav-item">
-                  <a class="nav-link" href="#!/mainPage">Főoldal</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#!/breakfast">Reggeli</a>
-              </li>
-              <li class="nav-item dropdown"ng-mouseover="isDropdownOpen = true" ng-mouseleave="isDropdownOpen = false" ng-class="{'show': isDropdownOpen}" >
-                <a class="nav-link" href="#!/lunch">Ebéd</a>
-                <div class="dropdown-menu" ng-class="{'show': isDropdownOpen}">
-                    <a class="dropdown-item" href="#!/appetizer">Előétel</a>
-                    <a class="dropdown-item" href="#!/mainCourse">Főétel</a>
-                    <a class="dropdown-item" href="#!/sideDish">Köret</a>
-                    <a class="dropdown-item" href="#!/dessert">Desszert</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/mainPage">Főoldal</a>
             </li>
-            
-              <li class="nav-item">
-                  <a class="nav-link" href="#!/dinner">Vacsora</a>
-              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/breakfast">Reggeli</a>
+            </li>
+            <li class="nav-item dropdown"ng-mouseover="isDropdownOpen = true" ng-mouseleave="isDropdownOpen = false" ng-class="{'show': isDropdownOpen}" >
+              <a class="nav-link" href="#!/lunch">Ebéd</a>
+              <div class="dropdown-menu" ng-class="{'show': isDropdownOpen}">
+                  <a class="dropdown-item" href="#!/appetizer">Előétel</a>
+                  <a class="dropdown-item" href="#!/mainCourse">Főétel</a>
+                  <a class="dropdown-item" href="#!/sideDish">Köret</a>
+                  <a class="dropdown-item" href="#!/dessert">Desszert</a>
+              </div>
+          </li>
+          
+            <li class="nav-item">
+                <a class="nav-link" href="#!/dinner">Vacsora</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/aboutUs">Rólunk</a>
+            </li>
               <li class="nav-item">
                   <a class="nav-link" href="#!/myRecipes">Saját receptek</a>
               </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#!/aboutUs">Rólunk</a>
-              </li>
+              
               <li class="nav-item">
                   <a class="nav-link" ng-controller="mainCtrl" ng-click="logout();" href="#!/login">Kijelentkezés</a>
               </li>
