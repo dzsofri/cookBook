@@ -26,11 +26,13 @@ app.post('/logincheck', (req, res)=>{
 
   let table = 'users';
   let field1 = 'name';
+  let field3 = 'email';
   let field2 = 'passwd';
   let value1 = req.body.name;
   let value2 = req.body.passwd;
+  let value3 = req.body.email;
 
-  pool.query(`SELECT * FROM ${table} WHERE ${field1}='${value1}' AND ${field2}='${value2}'`, (err, results)=>{
+  pool.query(`SELECT * FROM ${table} WHERE ${field1}='${value1}' AND ${field2}='${value2}' OR ${field3}='${value3}'`, (err, results)=>{
     sendResults(table, err, results, req, res, 'logincheck from');
   });
 });
