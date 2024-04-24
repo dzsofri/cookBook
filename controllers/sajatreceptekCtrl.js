@@ -11,8 +11,8 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
         let dinamika = document.querySelectorAll('.dinamika');
     
         // Ellenőrizzük, hogy minden adat meg lett-e adva
-        if (Type1Uj.value == null || Type2Uj.value == null || newfoodname.value == "" || imageInput.value == null || newrecipe.value == "") {
-            $scope.alert("Nem adtál meg minden adatot!");
+        if (Type1Uj.value == null || Type2Uj.value == null || newfoodname.value == "" || newrecipe.value == "") {
+            $scope.showMessage("Nem adtál meg minden adatot!");
         } else {
             // Ha minden adat meg van adva, létrehozzuk az új recept objektumot
             let newRecipe = {
@@ -31,12 +31,11 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                 // Kép feltöltése a megfelelő mappába, a recept ID-ja alapján
                
                     // Sikeres képfeltöltés esetén kiírjuk az üzenetet
-                    alert('Recept sikeresen hozzáadva');
+                    $scope.showMessage('Recept sikeresen hozzáadva');
                     // Input mezők tartalmának ürítése
                     Type1Uj.value = null;
                     Type2Uj.value = null;
                     newfoodname.value = "";
-                    imageInput.value = null;
                     newrecipe.value = "";
                 })
                 
@@ -349,5 +348,10 @@ const fileUploadGroupDiv = document.createElement('div');
 
    
     $scope.showOwnRecipes();
+    $scope.showMessage = function(msg){
+        let alertBox = document.querySelector('#alertBox');
+        alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
+        alertBox.classList.remove('d-none');
+    };
     
 });

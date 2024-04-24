@@ -8,7 +8,14 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
         let passwd = document.querySelector('#passwd').value;
         let confirm = document.querySelector('#confirm').value;
     
-        if (name == "" || email == "" || passwd == "" || confirm == ""){
+        // Ellenőrizze, hogy az email formátuma megfelelő-e
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            $scope.showMessage("Az email cím formátuma érvénytelen!");
+            return; // Ha érvénytelen, ne folytassa a regisztrációt
+        }
+        
+        if (name == "" || passwd == "" || confirm == ""){
             $scope.showMessage("Nem adtál meg minden adatot!");
         }
         else {
@@ -16,14 +23,20 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                 $scope.showMessage("A megadott jelszavak nem egyeznek!");
             }
             else {
-                // Ellenőrizze, hogy a felhasználónév létezik-e
-                axios.post('http://localhost:3000/logincheck', { name: name })
+                // Ellenőrizze, hogy a felhasználónév és az email már foglalt-e
+                axios.post('http://localhost:3000/logincheck', { name: name, passwd: passwd, email: email })
                     .then(res => {
                         if (res.data && res.data.length > 0) {
-                            // Ha már létezik ilyen felhasználónév, jelenítse meg az üzenetet
-                            $scope.showMessage("Ez a felhasználónév már foglalt!");
+                            // Ellenőrizze, hogy a felhasználónév már foglalt-e
+                            if (res.data.some(user => user.name === name)) {
+                                $scope.showMessage("Ez a felhasználónév már foglalt!");
+                            }
+                            // Ellenőrizze, hogy az email már foglalt-e
+                            if (res.data.some(user => user.email === email)) {
+                                $scope.showMessage("Ez az email cím már foglalt!");
+                            }
                         } else {
-                            // Ha a felhasználónév még nem foglalt, regisztrálja az új felhasználót
+                            // Ha a felhasználónév és az email még nem foglalt, regisztrálja az új felhasználót
                             let newUser = {
                                 name: name,
                                 email: email,
@@ -48,11 +61,13 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
                         }
                     })
                     .catch(err => {
-                        console.error('Felhasználónév ellenőrzési hiba:', err);
+                        console.error('Felhasználónév és email ellenőrzési hiba:', err);
                     });
             }
         }
     };
+    
+    
     
        // Bejelentkezés
     $scope.login = function() {
@@ -94,6 +109,12 @@ app.controller('userCtrl', function($scope, $rootScope, $location, ngNotify){
       
 
     $scope.showMessage = function(msg){
+        let alertBox = document.querySelector('#alertBox');
+        alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
+        alertBox.classList.remove('d-none');
+    };
+
+    $scope.showMessagesucces = function(msg){
         let alertBox = document.querySelector('#alertBox');
         alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
         alertBox.classList.remove('d-none');
