@@ -31,7 +31,7 @@ app.controller('sajatreceptekCtrl', function($scope, $http) {
                 // Kép feltöltése a megfelelő mappába, a recept ID-ja alapján
                
                     // Sikeres képfeltöltés esetén kiírjuk az üzenetet
-                    $scope.showMessage('Recept sikeresen hozzáadva');
+                    $scope.showMessage2('Recept sikeresen hozzáadva');
                     // Input mezők tartalmának ürítése
                     Type1Uj.value = null;
                     Type2Uj.value = null;
@@ -353,5 +353,28 @@ const fileUploadGroupDiv = document.createElement('div');
         alertBox.innerHTML = `<strong>HIBA!</strong> ${msg}`;
         alertBox.classList.remove('d-none');
     };
+
+    $scope.showMessage2 = function(msg){
+        let successBox = document.querySelector('#successBox');
+        successBox.innerHTML = `<strong>Siker!</strong> ${msg}`;
+        
+        successBox.classList.remove('d-none');
+    };
+    $("#alertBox").show(() => {
+        setTimeout(() => {
+            $("#alertBox").fadeTo(500, 1).slideUp(500, () => {
     
+                $(message).hide();
+            })
+        }, 5000)
+    });
+
+$("#successBox").show(() => {
+    setTimeout(() => {
+        $("#successBox").fadeTo(500, 1).slideUp(500, () => {
+
+            $(message).hide();
+        })
+    }, 5000)
+});
 });
